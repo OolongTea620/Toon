@@ -11,9 +11,9 @@
 <div id="getTicketButton container">
 <sec:authorize access="isAuthenticated()">
  	
- 	<div class="ticketUI col" >
-		&emsp;&emsp;&emsp;&emsp;&emsp;<div id="Tpoint" class="row">포인트 &nbsp; ${memberVO.point} P </div>
-		&emsp;&emsp;&emsp;&emsp;&emsp;<div id="Tstock" class="row">보유 소장권 갯수 &nbsp;  <span>${ticketBox.stock} 개 </span></div> 
+ 	<div class="ticketUI col">
+		<div id="Tpoint" class="row"><p>포인트 &nbsp; ${memberVO.point} P</p> </div>
+		<div id="Tstock" class="row">보유 소장권 갯수 &nbsp;  <span>${ticketBox.stock} 개 </span></div> 
 	</div>
 	<div class="col" id="TIcketform"> 
 		<form id="goto-ticket" action="${pageContext.request.contextPath}/point/ticketCharge" method="post">

@@ -42,7 +42,7 @@
                 <div class="login-input-container">
                     <div class="login-input-wrap input-id">
                         <i class="far fa-envelope"></i>
-                        <input placeholder="Username" type="text" id="username" name="username" aria-describedby="idlHelp" maxlength="6">
+                        <input placeholder="Username" type="text" id="username" name="username" aria-describedby="idlHelp" maxlength="13">
                         <small id="idlHelp"	class="form-text text-muted">
 							회원의 아이디를 숫자와 영어로 정확하게 입력하세요.
 						</small>

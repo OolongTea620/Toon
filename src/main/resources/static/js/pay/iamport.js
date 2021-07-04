@@ -61,10 +61,10 @@ $("#start-charge").click(function () {
 	}, function (rsp) {
 		if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	       // msg += '고유ID : ' + rsp.imp_uid;
+	       // msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	       // msg += '카드 승인번호 : ' + rsp.apply_num;
 	        
 	        var contents = '포인트 충전 :' + rsp.paid_amount + 'P';
 	        var send = { username: orderName, point: rsp.paid_amount, contents : contents }
@@ -88,7 +88,7 @@ $("#start-charge").click(function () {
 		}
 		else {
 			var msg = '결제에 실패하였습니다.';
-			msg += '에러내용 : ' + rsp.error_msg;
+			msg += '사유 : ' + rsp.error_msg;
 		}
 		alert(msg);
 	});

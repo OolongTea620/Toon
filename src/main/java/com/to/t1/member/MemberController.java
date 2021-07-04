@@ -244,7 +244,7 @@ public class MemberController {
 			memberVO.setPassword("0000");
 			int result = memberService.pwUpdate(memberVO);
 	
-			message="회원님의 비밀번호는 (0000)"+memberVO.getPassword()+" 으로 초기화 되었습니다.";
+			message="회원님의 비밀번호는 (00000000)으로 초기화 되었습니다.";
 		}
 
 		model.addAttribute("msg", message);

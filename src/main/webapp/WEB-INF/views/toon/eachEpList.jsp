@@ -33,7 +33,6 @@
 
 </head>
 <body>
-
 <c:import url="../fragments/header.jsp"></c:import>
 
   <div id='left-box'>
@@ -66,7 +65,7 @@
     </tr>
     
      <tr>
-       <td align="left"><h4>&emsp; 장르 : ${toonVO.genre}</h4></td>
+       <td align="left"><h4>&emsp; 장르 : ${toonVO.genre} / <span class="totalRating">웹툰별점 : <fmt:formatNumber value="${toonVO.ratingSum/toonVO.ratingPerson}" pattern=".00"/></span></h4></td>
     </tr>
   
       <tr>
@@ -90,6 +89,7 @@
      
     </table><br>
 
+     <c:import url="./buyTicketForm.jsp"></c:import>
    <!-- 리스트 -->
 
       <table class="table table-borderless viewList">
