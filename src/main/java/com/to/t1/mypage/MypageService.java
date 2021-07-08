@@ -6,10 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.to.t1.board.BoardVO;
-import com.to.t1.member.MemberMapper;
 import com.to.t1.member.MemberVO;
-import com.to.t1.toon.ToonVO;
 import com.to.t1.util.Pager;
 
 @Service

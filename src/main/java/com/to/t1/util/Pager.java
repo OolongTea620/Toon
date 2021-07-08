@@ -50,7 +50,6 @@ public class Pager {
 			lastNum = totalPage;
 			this.next=false;
 		}
-		
 		if(curBlock==1) {
 			this.pre=false;
 		}
@@ -161,6 +160,7 @@ public class Pager {
 	private long toonNum;
 	private long eachEpNum;
 	private long epNum;
+	private long maxEp;
 
 	public long getToonNum() {
 		return toonNum;
@@ -185,8 +185,6 @@ public class Pager {
 	public void setEachEpNum(long eachEpNum) {
 		this.eachEpNum = eachEpNum;
 	}
-	
-	private long maxEp;
 
 	public long getMaxEp() {
 		return maxEp;

@@ -1,6 +1,5 @@
 package com.to.t1.review;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,15 +14,12 @@ import com.to.t1.util.Pager;
 @Controller
 @RequestMapping("/review/**")
 public class ReviewController {
-
 	@Autowired
 	private ReviewService reviewService;
 	@Autowired
 	private ToonService toonService;
 	@Autowired
 	private EachEpService eachEpService;
-	
-
 	
 	@PostMapping("setReview")
 	public void setReview(ReviewVO reviewVO, Model model,Authentication auth)throws Exception{
@@ -32,7 +28,6 @@ public class ReviewController {
 			toonService.updateScore(reviewVO);
 			eachEpService.updateScore(reviewVO);
 			reviewService.setReview(reviewVO);
-			
 			//리뷰리스트를 js에서 리로드하기 위해서 추가 
 			Pager pager = new Pager();
 			pager.setEpNum(reviewVO.getEpNum());
@@ -56,8 +51,6 @@ public class ReviewController {
 		if(auth!=null) {
 			reviewVO.setUsername(auth.getName());
 			model.addAttribute("result", reviewService.updateReview(reviewVO));
-
 		}
 	}
-
 }

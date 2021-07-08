@@ -6,10 +6,8 @@ import lombok.Data;
 
 @Data
 public class FavoritetoonVO {
-
 	private long toonNum;
 	private String username;
 	private long likeClick;
 	private Timestamp likeDate;
-	//확인
 }

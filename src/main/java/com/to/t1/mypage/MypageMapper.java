@@ -5,10 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.to.t1.board.BoardVO;
-import com.to.t1.member.MemberVO;
-import com.to.t1.util.Pager;
-
 @Mapper
 public interface MypageMapper {
 

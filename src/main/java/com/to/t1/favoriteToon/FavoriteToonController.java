@@ -30,7 +30,6 @@ public class FavoriteToonController {
 		int result=0;
 		if(auth!=null) {
 			favoritetoonVO.setUsername(auth.getName());
-			//model.addAttribute("result", favoriteToonService.delFavorite(favoritetoonVO));
 			result=favoriteToonService.delFavorite(favoritetoonVO);
 		}
 		

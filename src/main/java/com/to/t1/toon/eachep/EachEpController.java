@@ -21,10 +21,8 @@ import com.to.t1.util.Pager;
 @Controller
 @RequestMapping("/toon/**")
 public class EachEpController {
-
    @Autowired
    private EachEpService eachEpService;
-   
    @Autowired
    private ReviewService reviewService;
    @Autowired
@@ -70,7 +68,6 @@ public class EachEpController {
       List<ReviewVO> reviewVO = reviewService.getList(pager);
 
       list.getEachEpVO().get(0).setReviewVO(reviewVO);
-      System.out.println("if"+(list.getEachEpVO().get(0).getReviewVO().size()==0));
       
       //Next code : revNum==0일때 reviewVO!=null 값으로 null이 되지않음 -> setReviewVO==null 
       if(list.getEachEpVO().get(0).getReviewVO().size()==0) {

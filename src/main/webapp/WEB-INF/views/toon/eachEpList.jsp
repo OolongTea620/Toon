@@ -51,10 +51,7 @@
    </div>
    
    <!-- 리스트 -->
-
       <table cellpadding="0" cellspacing="0" class="viewList">
-      <%-- <caption><span class="blind">회차별 목록</span></caption> --%>
-      <col width="99"><col width="*"><col width="141"><col width="76">
       <thead>
       <tr>
          <th scope="col">이미지</th>
@@ -73,7 +70,7 @@
                </sec:authorize>
          
                <sec:authorize access="isAuthenticated()">
-                  <a href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${eachEpVO.eachEpNum}&epNum=${eachEpVO.epNum}&username=<sec:authentication property="principal.username"/>" >
+                  <a href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${eachEpVO.eachEpNum}&epNum=${eachEpVO.epNum}" >
                </sec:authorize>
                
                <img src="${eachEpVO.epSumImg}"
@@ -83,15 +80,13 @@
             </td>
             
             <td class="title">
-            
                <sec:authorize access="isAnonymous()">
                   <a href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${eachEpVO.eachEpNum}&epNum=${eachEpVO.epNum}" >
                </sec:authorize>
          
                <sec:authorize access="isAuthenticated()">
-                  <a href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${eachEpVO.eachEpNum}&epNum=${eachEpVO.epNum}&username=<sec:authentication property="principal.username"/>" >
+                  <a href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${eachEpVO.eachEpNum}&epNum=${eachEpVO.epNum}" >
                </sec:authorize>
-               
             ${eachEpVO.eachEpNum}화</a>
             </td>
             <td>

@@ -3,7 +3,6 @@ package com.to.t1.toon;
 
 import java.util.List;
 
-import com.to.t1.member.MemberVO;
 import com.to.t1.toon.eachep.EachEpVO;
 
 import lombok.Data;

@@ -5,19 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.to.t1.favoriteToon.FavoritetoonVO;
 import com.to.t1.member.MemberService;
 import com.to.t1.member.MemberVO;
-import com.to.t1.review.ReviewService;
 import com.to.t1.review.ReviewVO;
 import com.to.t1.ticket.UseTicketVO;
 import com.to.t1.util.Pager;
@@ -32,9 +28,6 @@ public class MypageController {
 	
 	@Autowired
 	private MemberService memberService;
-	
-	@Autowired
-	private ReviewService reviewService;
 
 	@GetMapping("recentToon") 
 	public String getList(Model model, MemberVO memberVO, Pager pager)throws Exception{

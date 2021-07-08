@@ -72,7 +72,6 @@
   
   	 <tr>
     	<td>
-    	
     	<a href="#" title="관심웹툰" class="book_maker on" id="check_favorite">
          	<c:choose>
 	      		<c:when test="${empty favorToon}">
@@ -83,30 +82,25 @@
 	      		</c:otherwise>
 	     	</c:choose>
 		 </a> 
-		 
-		<a href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=1&epNum=${toonVO.eachEpVO['0'].epNum}" title="첫회보기" class="first"><button class="btn-outline-primary">첫회보기</button></a>
-		 <a href="/toon/eachEpList?toonNum=${toonVO.toonNum}" title="목록보기" class="backToTheList"><button class="btn-outline-secondary">목록보기</button></a>
-		 
+			<a href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=1&epNum=1" title="첫회보기" class="first"><button class="btn-outline-primary">첫회보기</button></a>
+			<a href="/toon/eachEpList?toonNum=${toonVO.toonNum}" title="목록보기" class="backToTheList"><button class="btn-outline-secondary">목록보기</button></a>
 		 </td>
     </tr>
   	
     </table><br>
     	
      <!-- 웹툰 소개 -->
-	<center><div style="width:1010px; height:50px; text-align: center; ">
+	<div style="width:1010px; height:50px; text-align: center; ">
 		<h3 style="color: black">${toonVO.eachEpVO['0'].epTitle}</h3>
-	</div></center>
+	</div>
 	
-	<center><div style="width:1010px; height:50px;">
+	<div style="width:1010px; height:50px;">
 		회별 별점 :  <span class="star"><em style="width: 98%">평점</em></span> 
                   <span id="topPointTotalNumber"><strong><fmt:formatNumber value="${toonVO.eachEpVO['0'].epRatingSum/toonVO.eachEpVO['0'].epRatingPerson}" pattern=".00"/></strong></span> 
                   <span class="pointTotalPerson">(참여 <em>${toonVO.eachEpVO['0'].epRatingPerson}</em>)</span>
-         &nbsp &nbsp &nbsp &nbsp &nbsp 
          
         등록일 : ${toonVO.eachEpVO['0'].epDate}  
-         &nbsp &nbsp &nbsp &nbsp 
-        
-         &nbsp &nbsp &nbsp 
+
             <c:if test="${toonVO.eachEpVO['0'].eachEpNum!=1}">
                <button class="btn-outline-primary">
                <span class="pre"> 
@@ -119,16 +113,13 @@
                <a href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${toonVO.eachEpVO['0'].eachEpNum+1}&epNum=${toonVO.eachEpVO['0'].epNum+1}">다음화</a>
                </span></button>
             </c:if>
-         </div></center>         
+         </div>        
 	
 
    <div class="tit_area">
-
-
    <!-- content Img  -->
    <div class="wt_viewer" style="background: #FFFFFF">
-   <img src="${toonVO.eachEpVO['0'].epContentImg}" alt="comic content" id="content_image_0"
-	oncontextmenu="return false" ondragstart="return false">
+   <img src="${toonVO.eachEpVO['0'].epContentImg}" alt="comic content" id="content_image_0" oncontextmenu="return false" ondragstart="return false">
    </div> <br><br>
 
    </div>
@@ -159,7 +150,7 @@
         <td> <div class="review_contents">
          <textarea rows="2" id="comments" class="review_textarea" style="width: 500px" placeholder="별점과 댓글 모두 입력해주세요."></textarea>
       </div></td>
-      	<td>&nbsp &nbsp <input type="button" id="save" value="등록"></td>
+      	<td><input type="button" id="save" value="등록"></td>
       </tr>
       
     </table>
@@ -203,16 +194,19 @@
           <ul class="pagination">
      
            <c:if test="${pager.pre}">   
-             <li class="page-item"><a class="page-link p" href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${toonVO.eachEpVO['0'].eachEpNum}&epNum=${toonVO.eachEpVO['0'].epNum}&curPage=${pager.curPage-1}" title="${pager.startNum-1}">Previous</a></li>
+             <li class="page-item"><a class="page-link p" href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${toonVO.eachEpVO['0'].eachEpNum}
+             &epNum=${toonVO.eachEpVO['0'].epNum}&curPage=${pager.curPage-1}" title="${pager.startNum-1}">Previous</a></li>
             </c:if>
       
            <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
       
-            <li class="page-item"><a class="page-link p" href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${toonVO.eachEpVO['0'].eachEpNum}&epNum=${toonVO.eachEpVO['0'].epNum}&curPage=${i}" title="${i}">${i}</a></li>
+            <li class="page-item"><a class="page-link p" href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${toonVO.eachEpVO['0'].eachEpNum}
+            &epNum=${toonVO.eachEpVO['0'].epNum}&curPage=${i}" title="${i}">${i}</a></li>
             </c:forEach>
       
              <c:if test="${pager.next}">
-             <li class="page-item"><a class="page-link p" href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${toonVO.eachEpVO['0'].eachEpNum}&epNum=${toonVO.eachEpVO['0'].epNum}&curPage=${pager.curPage+1}" title="${pager.lastNum+1}">Next</a></li>
+             <li class="page-item"><a class="page-link p" href="/toon/eachEpSelect?toonNum=${toonVO.toonNum}&eachEpNum=${toonVO.eachEpVO['0'].eachEpNum}
+             &epNum=${toonVO.eachEpVO['0'].epNum}&curPage=${pager.curPage+1}" title="${pager.lastNum+1}">Next</a></li>
              </c:if>
            </ul>
       </div>
