@@ -1,0 +1,214 @@
+CREATE TABLE `member` (
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`password` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`name` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`nickname` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`phone` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`email` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`point` BIGINT(20) UNSIGNED NULL DEFAULT '0',
+	`enabled` BIT(1) NULL DEFAULT NULL,
+	PRIMARY KEY (`username`) USING BTREE
+)
+
+CREATE TABLE `member_role` (
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`id` BIGINT(20) NOT NULL,
+	PRIMARY KEY (`username`, `id`) USING BTREE,
+	INDEX `MR_ID_FK` (`id`) USING BTREE,
+	CONSTRAINT `MR_ID_FK` FOREIGN KEY (`id`) REFERENCES `user03`.`role` (`id`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+	CONSTRAINT `MR_UN_FK` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE RESTRICT ON DELETE CASCADE
+)
+
+CREATE TABLE `role` (
+	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`roleName` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`id`) USING BTREE
+)
+
+CREATE TABLE `joinfiles` (
+	`fileNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`fileName` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`oriName` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`fileNum`) USING BTREE,
+	INDEX `JK_UN_FK` (`username`) USING BTREE,
+	CONSTRAINT `JK_UN_FK` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE RESTRICT ON DELETE CASCADE
+)
+
+CREATE TABLE `eachep` (
+	`epNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`toonNum` BIGINT(20) NOT NULL,
+	`eachEpNum` BIGINT(20) NULL DEFAULT '0',
+	`epSumImg` VARCHAR(400) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`epTitle` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`epDate` DATE NULL DEFAULT current_timestamp(),
+	`epContentImg` VARCHAR(400) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`epHit` BIGINT(20) UNSIGNED NULL DEFAULT '0',
+	`epRatingSum` BIGINT(20) UNSIGNED NULL DEFAULT '0',
+	`epRatingPerson` BIGINT(20) UNSIGNED NULL DEFAULT '0',
+	PRIMARY KEY (`epNum`) USING BTREE,
+	INDEX `TN_EE_FK` (`toonNum`) USING BTREE,
+	CONSTRAINT `TN_EE_FK` FOREIGN KEY (`toonNum`) REFERENCES `user03`.`toon` (`toonNum`) ON UPDATE RESTRICT ON DELETE CASCADE
+)
+
+CREATE TABLE `favoritetoon` (
+	`toonNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`likeClick` BIGINT(20) NOT NULL DEFAULT '0',
+	`likeDate` DATETIME NULL DEFAULT current_timestamp(),
+	PRIMARY KEY (`toonNum`) USING BTREE,
+	INDEX `UN_FT_FK` (`username`) USING BTREE,
+	CONSTRAINT `TN_FT_FK` FOREIGN KEY (`toonNum`) REFERENCES `user03`.`toon` (`toonNum`) ON UPDATE RESTRICT ON DELETE CASCADE,
+	CONSTRAINT `UN_FT_FK` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE RESTRICT ON DELETE CASCADE
+)
+
+CREATE TABLE `free` (
+	`boNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`freeTitle` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`freeContents` TEXT(65535) NOT NULL COLLATE 'utf8_general_ci',
+	`freeDate` DATE NOT NULL,
+	`freeHit` BIGINT(20) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`boNum`) USING BTREE
+)
+
+CREATE TABLE `notice` (
+	`boNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`noticeKinds` VARCHAR(200) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`noticeTitle` VARCHAR(200) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`username` VARCHAR(200) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`noticeContents` TEXT(65535) NOT NULL COLLATE 'utf8_general_ci',
+	`createdDate` DATE NOT NULL,
+	`noticeHit` BIGINT(20) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`boNum`) USING BTREE
+)
+
+CREATE TABLE `noticefiles` (
+	`fileNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`boNum` BIGINT(20) NULL DEFAULT NULL,
+	`fileName` VARCHAR(200) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`oriName` VARCHAR(200) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`fileNum`) USING BTREE,
+	INDEX `NF_FN_FK` (`boNum`) USING BTREE,
+	CONSTRAINT `NF_FN_FK` FOREIGN KEY (`boNum`) REFERENCES `user03`.`notice` (`boNum`) ON UPDATE RESTRICT ON DELETE CASCADE
+)
+
+CREATE TABLE `orderlist` (
+	`orderNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`toonNum` BIGINT(20) NOT NULL,
+	`usePoint` BIGINT(20) NOT NULL DEFAULT '0',
+	`totalCount` BIGINT(20) NOT NULL DEFAULT '0',
+	`actualPrice` BIGINT(20) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`orderNum`) USING BTREE,
+	INDEX `UN_OL_FK` (`username`) USING BTREE,
+	INDEX `TN_OL_FK` (`toonNum`) USING BTREE,
+	CONSTRAINT `TN_OL_FK` FOREIGN KEY (`toonNum`) REFERENCES `user03`.`toon` (`toonNum`) ON UPDATE RESTRICT ON DELETE CASCADE,
+	CONSTRAINT `UN_OL_FK` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE RESTRICT ON DELETE CASCADE
+)
+
+CREATE TABLE `point` (
+	`username` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`point` BIGINT(20) NOT NULL DEFAULT '0',
+	`cDate` DATETIME NULL DEFAULT current_timestamp(),
+	`contents` VARCHAR(300) NULL DEFAULT '\'알수없음\'' COLLATE 'utf8_general_ci',
+	INDEX `CP_FK` (`username`) USING BTREE,
+	CONSTRAINT `CP_FK` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+
+CREATE TABLE `qna` (
+	`boNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`qnaTitle` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`qnaContents` MEDIUMTEXT NOT NULL COLLATE 'utf8_general_ci',
+	`createdDate` DATE NULL DEFAULT current_timestamp(),
+	`qnaHit` BIGINT(20) NULL DEFAULT '0',
+	`ref` BIGINT(20) NOT NULL,
+	`step` BIGINT(20) NULL DEFAULT '0',
+	`depth` BIGINT(20) NULL DEFAULT '0',
+	PRIMARY KEY (`boNum`) USING BTREE
+)
+
+CREATE TABLE `qnafiles` (
+	`fileNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`boNum` BIGINT(20) NULL DEFAULT NULL,
+	`fileName` VARCHAR(200) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`oriName` VARCHAR(200) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`fileNum`) USING BTREE,
+	INDEX `QF_FN_FK` (`boNum`) USING BTREE,
+	CONSTRAINT `QF_FN_FK` FOREIGN KEY (`boNum`) REFERENCES `user03`.`qna` (`boNum`) ON UPDATE RESTRICT ON DELETE CASCADE
+)
+
+CREATE TABLE `recenttoon` (
+	`recNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`epNum` BIGINT(20) NULL DEFAULT NULL,
+	`toonNum` BIGINT(20) NULL DEFAULT NULL,
+	`viewDate` DATETIME NULL DEFAULT current_timestamp(),
+	PRIMARY KEY (`recNum`) USING BTREE,
+	INDEX `EP_RT_FK` (`epNum`) USING BTREE,
+	INDEX `TN_RT_FK` (`toonNum`) USING BTREE,
+	INDEX `UN_RT_FK` (`username`) USING BTREE,
+	CONSTRAINT `EP_RT_FK` FOREIGN KEY (`epNum`) REFERENCES `user03`.`eachep` (`epNum`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `TN_RT_FK` FOREIGN KEY (`toonNum`) REFERENCES `user03`.`toon` (`toonNum`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `UN_RT_FK` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+
+CREATE TABLE `review` (
+	`revNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`toonNum` BIGINT(20) NULL DEFAULT NULL,
+	`epNum` BIGINT(20) NULL DEFAULT NULL,
+	`username` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`rating` BIGINT(20) NULL DEFAULT '10',
+	`comments` VARCHAR(200) NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`commentDate` DATE NULL DEFAULT current_timestamp(),
+	PRIMARY KEY (`revNum`) USING BTREE,
+	INDEX `EN_RV_FK` (`epNum`) USING BTREE,
+	INDEX `UN_RV_FK` (`username`) USING BTREE,
+	INDEX `TN_RV_FK` (`toonNum`) USING BTREE,
+	CONSTRAINT `EN_RV_FK` FOREIGN KEY (`epNum`) REFERENCES `user03`.`eachep` (`epNum`) ON UPDATE RESTRICT ON DELETE CASCADE,
+	CONSTRAINT `TN_RV_FK` FOREIGN KEY (`toonNum`) REFERENCES `user03`.`toon` (`toonNum`) ON UPDATE RESTRICT ON DELETE CASCADE,
+	CONSTRAINT `UN_RV_FK` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE RESTRICT ON DELETE CASCADE
+)
+
+CREATE TABLE `ticketbox` (
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`toonNum` BIGINT(20) NOT NULL,
+	`stock` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`sort` INT(10) NOT NULL,
+	PRIMARY KEY (`username`, `toonNum`, `sort`) USING BTREE,
+	INDEX `TB_FK2` (`toonNum`) USING BTREE,
+	CONSTRAINT `TB_FK1` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `TB_FK2` FOREIGN KEY (`toonNum`) REFERENCES `user03`.`toon` (`toonNum`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+
+CREATE TABLE `toon` (
+	`toonNum` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`toonTitle` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`genre` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`writerId` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`toonSum` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`totalHit` BIGINT(20) UNSIGNED NULL DEFAULT '0',
+	`toonDay` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`state` VARCHAR(200) NULL DEFAULT '0' COLLATE 'utf8_general_ci',
+	`titleImg` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`ratingSum` BIGINT(20) UNSIGNED NULL DEFAULT '0',
+	`ratingPerson` BIGINT(20) UNSIGNED NULL DEFAULT '0',
+	PRIMARY KEY (`toonNum`) USING BTREE,
+	INDEX `WR_TN_FK` (`writerId`) USING BTREE,
+	CONSTRAINT `WR_TN_FK` FOREIGN KEY (`writerId`) REFERENCES `user03`.`member` (`username`) ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+
+CREATE TABLE `useticket` (
+	`username` VARCHAR(200) NOT NULL COLLATE 'utf8_general_ci',
+	`toonNum` BIGINT(20) NOT NULL,
+	`sort` BIGINT(20) NOT NULL,
+	`epNum` BIGINT(20) NOT NULL,
+	`utDate` TIMESTAMP NULL DEFAULT NULL,
+	PRIMARY KEY (`username`, `toonNum`, `epNum`) USING BTREE,
+	INDEX `up_tn_FK` (`toonNum`) USING BTREE,
+	INDEX `up_ep_FK` (`epNum`) USING BTREE,
+	CONSTRAINT `up_ep_FK` FOREIGN KEY (`epNum`) REFERENCES `user03`.`eachep` (`epNum`) ON UPDATE CASCADE ON DELETE NO ACTION,
+	CONSTRAINT `up_tn_FK` FOREIGN KEY (`toonNum`) REFERENCES `user03`.`toon` (`toonNum`) ON UPDATE CASCADE ON DELETE NO ACTION,
+	CONSTRAINT `up_un_FK` FOREIGN KEY (`username`) REFERENCES `user03`.`member` (`username`) ON UPDATE CASCADE ON DELETE NO ACTION
+)
