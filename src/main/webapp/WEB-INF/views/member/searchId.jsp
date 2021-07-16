@@ -175,13 +175,11 @@ $("#name").keyup(function(event){
 					msg = data;
 					swal(msg);
 					message = $("message").val("principal.username");
-
 				}
-
 			})
 		}
-
 	})
+	
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>

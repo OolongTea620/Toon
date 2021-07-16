@@ -155,7 +155,6 @@
 	
 	
 		$("#btn").click(function() {
-
 			var username = $("#username").val();
 			var phone = $("#phone").val();
 			if (phone == "" || username == "") {
@@ -168,7 +167,6 @@
 						phone : phone, //주는사람
 						username : username,
 					},
-
 					dataType : 'text',
 					success : function(data) {
 						msg = data;
@@ -178,8 +176,9 @@
 
 				})
 			}
-
 		})
+		
+		
 	</script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
 </body>

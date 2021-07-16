@@ -97,25 +97,6 @@ public class MemberController {
 		return "member/memberLoginResult2";
 	}
 
-//	@PostMapping("login")
-//	public String getLogin(MemberVO memberVO, HttpSession session)throws Exception{
-//
-//		memberVO = memberService.getLogin(memberVO);
-//
-//		if(memberVO != null) {
-//			session.setAttribute("member", memberVO);
-//		}
-//
-//		return "redirect:/";
-//	}
-
-	//@GetMapping("logout")
-//	public String logout(HttpSession session)throws Exception{
-//
-//		session.invalidate();
-//
-//		return "redirect:../";
-//	}
 
 	@GetMapping("myPage") 
 	public String myPage(MemberVO memberVO, HttpSession session, Authentication auth2, Model model)throws Exception{
@@ -197,7 +178,6 @@ public class MemberController {
     @ResponseBody
 	public String searchId(MemberVO memberVO,Model model)throws Exception{
 		memberVO = memberService.searchId(memberVO);
-
 		String message = "이름과 핸드폰 불일치";
 
 		if(memberVO == null) {
@@ -206,12 +186,9 @@ public class MemberController {
 		} else {
 			message="회원님의 아이디는 " + memberVO.getUsername()+" 입니다.";
 		}
-
 		model.addAttribute("msg", message);
 		System.out.println(message);
-
-		return message;
-		
+		return message;	
 	}
 
 	@GetMapping("memberIdCheck")
@@ -243,12 +220,9 @@ public class MemberController {
 		} else {
 			memberVO.setPassword("0000");
 			int result = memberService.pwUpdate(memberVO);
-	
-			message="회원님의 비밀번호는 (00000000)으로 초기화 되었습니다.";
+			message="회원님의 비밀번호는 (0000)으로 초기화 되었습니다.";
 		}
-
 		model.addAttribute("msg", message);
-
 		return message;
 	}
 
