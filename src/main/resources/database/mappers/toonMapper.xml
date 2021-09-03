@@ -83,7 +83,7 @@
 	</select>
 		
 	<select id="ranking" parameterType="ToonVO" resultType="ToonVO">
-SELECT *
+	SELECT *
 	FROM toon t JOIN
 	member m ON t.writerId = m.username
 	WHERE state=0

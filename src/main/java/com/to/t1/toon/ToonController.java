@@ -92,13 +92,10 @@ public class ToonController {
 	
 	@GetMapping("toonDay")
 	   public ModelAndView toonDay(ToonVO toonVO,MemberVO memberVO, Authentication auth2) throws Exception {
-	      ModelAndView mv = new ModelAndView();
-	      
+	      ModelAndView mv = new ModelAndView();	      
 	      if(auth2 != null) {
 	    	  memberVO = memberService.myPage((MemberVO) auth2.getPrincipal());
-	    	  mv.addObject("memberVO",memberVO);
-	    	  
-	      }
+	    	  mv.addObject("memberVO",memberVO);}
 	      
 	      toonVO.setToonDay("mon");
 	      List<ToonVO> mt = toonService.toonDay(toonVO,memberVO);
@@ -120,8 +117,7 @@ public class ToonController {
 	      
 	      toonVO.setToonDay("sun");
 	      List<ToonVO> st2 = toonService.toonDay(toonVO,memberVO);
-	      
-	      
+	      	      
 	      mv.addObject("mt", mt);
 	      mv.addObject("tt", tt);
 	      mv.addObject("wt", wt);
@@ -139,13 +135,11 @@ public class ToonController {
 	
 	@GetMapping("toonDayAver")
 	public ModelAndView toonDayAver(ToonVO toonVO,MemberVO memberVO, Authentication auth2) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		
+		ModelAndView mv = new ModelAndView();		
 		if(auth2 != null) {
 	    	  memberVO = memberService.myPage((MemberVO) auth2.getPrincipal());
 	    	  mv.addObject("memberVO",memberVO);
-	      }
-		
+	      }		
 		toonVO.setToonDay("mon");
 		List<ToonVO> mt = toonService.toonDayAver(toonVO,memberVO);
 		
@@ -165,8 +159,7 @@ public class ToonController {
 		List<ToonVO> st = toonService.toonDayAver(toonVO,memberVO);
 		
 		toonVO.setToonDay("sun");
-		List<ToonVO> st2 = toonService.toonDayAver(toonVO,memberVO);
-		
+		List<ToonVO> st2 = toonService.toonDayAver(toonVO,memberVO);		
 		
 		mv.addObject("mt", mt);
 		mv.addObject("tt", tt);

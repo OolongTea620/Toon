@@ -317,8 +317,7 @@
                                 <a style="font-size:20px;" href="/toon/eachEpList?toonNum=52">데드퀸 - Fantasy</a>
                             </div>
                             <a class="d-block" href="single-blog.html">
-                                <h4>절망에 빠져 죽음이 임박했을때, 진짜 여왕이 재림한다!
-하이브 세계관의 장대한 끝, 데드퀸</h4>
+                                <h4>절망에 빠져 죽음이 임박했을때, 진짜 여왕이 재림한다! 하이브 세계관의 장대한 끝, 데드퀸</h4>
                             </a>
                            
                         </div>
@@ -440,8 +439,7 @@
                                 <a href="/toon/eachEpList?toonNum=103">유미의 세포들</a>
                             </div>
                             <a class="d-block" href="single-blog.html">
-                                <h4>유미는 지금 무슨 생각을 하고 있을까?
-그녀의 머릿속에서 바쁘게 움직이는 세포들 이야기!</h4>
+                                <h4>유미는 지금 무슨 생각을 하고 있을까? 그녀의 머릿속에서 바쁘게 움직이는 세포들 이야기!</h4>
                             </a>
                             
                         </div>
