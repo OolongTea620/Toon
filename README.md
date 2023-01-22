@@ -31,6 +31,8 @@ IDE : Eclipse-Cummunity
 
 [기능명세목록.pdf 링크](https://drive.google.com/file/d/1oqLK5b0BQQelXBjxJog7IH2zOSNvBKpA/view?usp=sharing)
 
+***
+
 ## 구현 내용
 
 ### 1. 포인트 구입(충전)
